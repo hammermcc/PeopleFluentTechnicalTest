@@ -15,11 +15,12 @@ import com.people.fluent.technical.test.products.OrangeProduct;
 
 public class PeopleFluentTechnicalTest implements IPeopleFluentTechnicalTest {
 
-
 	public static String APPLE_PRODUCT_NAME   = null;
 	public static Double APPLE_PRODUCT_PRICE  = null;
+	public static String APPLE_PRODUCT_OFFER  = null;
 	public static String ORANGE_PRODUCT_NAME  = null;
 	public static Double ORANGE_PRODUCT_PRICE = null;
+	public static String ORANGE_PRODUCT_OFFER  = null;
 	
 	private AppleProduct  appleProduct  = null;
 	private OrangeProduct orangeProduct = null;
@@ -50,11 +51,15 @@ public class PeopleFluentTechnicalTest implements IPeopleFluentTechnicalTest {
 			for (int i = 0; i < products.size(); i++) {
 				product = products.get(i).getAsString();
 				if (product.equalsIgnoreCase(this.appleProduct.getProductName())) {
-					totalPrice += addDouble(this.appleProduct.getProductPrice());
+					if (!this.appleProduct.isUnderOffer()) {
+						totalPrice += addDouble(this.appleProduct.getProductPrice());
+					}
 				}
 				else {
 					if (product.equalsIgnoreCase(this.orangeProduct.getProductName())) {
-						totalPrice += addDouble(this.orangeProduct.getProductPrice());
+						if (!this.orangeProduct.isUnderOffer()) {
+							totalPrice += addDouble(this.orangeProduct.getProductPrice());
+						}
 					}
 					else {
 						System.out.println("No matching Product found for : " + product);
@@ -77,8 +82,10 @@ public class PeopleFluentTechnicalTest implements IPeopleFluentTechnicalTest {
 			
 			APPLE_PRODUCT_NAME   = (String)props.getProperty(IProduct.APPLE_PRODUCT_NAME_PARAM);
 			APPLE_PRODUCT_PRICE  = Double.valueOf(props.getProperty(IProduct.APPLE_PRODUCT_PRICE_PARAM));
+			APPLE_PRODUCT_OFFER  = (String)props.getProperty(IProduct.APPLE_PRODUCT_OFFER_PARAM);
 			ORANGE_PRODUCT_NAME  = props.getProperty(IProduct.ORANGE_PRODUCT_NAME_PARAM);
 			ORANGE_PRODUCT_PRICE = Double.valueOf(props.getProperty(IProduct.ORANGE_PRODUCT_PRICE_PARAM));
+			ORANGE_PRODUCT_OFFER = (String)props.getProperty(IProduct.ORANGE_PRODUCT_OFFER_PARAM);
 		} catch (Exception ex) {
 			return false;
 		}

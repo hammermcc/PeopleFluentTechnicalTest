@@ -11,17 +11,20 @@ public class PeopleFluentTechnicalTestTest extends TestCase {
 
 	public void testTotalPrice () {
 		JsonParser parser = new JsonParser();
-		PeopleFluentTechnicalTest cgt = new PeopleFluentTechnicalTest("resources/properties.txt");
+		PeopleFluentTechnicalTest pftt = new PeopleFluentTechnicalTest("resources/properties.txt");
 		JsonArray jsonArray = new JsonArray();
 		jsonArray.add("Apple");
 		jsonArray.add("Apple");
 		jsonArray.add("Orange");
 		jsonArray.add("Apple");
+		jsonArray.add("Orange");
+		jsonArray.add("Orange");
+		jsonArray.add("Apple");
 		JsonObject input = new JsonObject();
 		input.add("products", jsonArray);
-		String output = cgt.findTotalPrice(input.toString());
+		String output = pftt.findTotalPrice(input.toString());
 		JsonObject outputObj = parser.parse(output).getAsJsonObject();
 		Double price = (Double)outputObj.get("totalPrice").getAsDouble();
-		assertEquals("Total Price not correct", 205.0d, price);
+		assertEquals("Total Price not correct", 170.0d, price);
 	}
 }

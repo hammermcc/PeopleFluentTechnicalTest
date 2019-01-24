@@ -1,4 +1,6 @@
 appleProductNameParam=Apple
 appleProductPriceParam=60.0
+appleProductOfferParam=2for1
 orangeProductNameParam=Orange
 orangeProductPriceParam=25.0
+orangeProductOfferParam=3for2
